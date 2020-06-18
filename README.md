@@ -17,9 +17,38 @@
 
 ## 1. Descripción <a name="id1"></a>
 
-En este documento se va a detallar como crear nodos de Drupal cargando los datos de Drupal. La importancia de este documento radica en que podemos exportar toda nuestra base de datos de Drupal 8 y llevarnosla a cualquier otro servidor y desde allí automatizar el proceso de creación de contenido.
+En este documento se va a detallar como crear nodos de Drupal cargando los datos de la base de datos. La importancia de este documento radica en que podemos exportar toda nuestra base de datos de Drupal 8 y llevarnosla a cualquier otro servidor y desde allí automatizar el proceso de creación de contenido.
 
 Para este ejemplo se va a crear contenido para el nodo tipo 'noticias_fulp' (dicho ya ha sido creado desde la entrada gráfica).
+
+## Instrucción para crear contenido
+
+La estructura para crear un nodo sería la siguiente.
+
+```php
+use Drupal\node\Entity\Node;
+
+    $node = Node::create(['type' => 'noticiasfulp']);
+    $node->set('title', 'Nuestro título');
+    $node->set('body', [
+        'value' => 'Este es el body',
+        'format' => 'basic_html'
+    ]);
+
+    $node->enforceIsNew();
+    $node->save();
+    // }
+```
+
+Podemos probarlo en ejecutar_php
+
+GIF ENSEÑANDO COMO SE EJECUTA
+
+![enseñando_ejecutar_php]()
+
+No recomendado ya que la llamadas a bases de datos externas no se mostrarán adecuadamente
+
+Ver el punto [ejecutando mediante include](#id)
 
 ## Datos requeridos (nodo noticias_fulp)
 
@@ -81,34 +110,6 @@ _Tabla file_managed_
 // AÑADIR GIF
 ![](name-of-giphy.gif)
 
-## Instrucción para crear contenido
-
-La estructura para crear un nodo sería la siguiente.
-
-```php
-use Drupal\node\Entity\Node;
-
-    $node = Node::create(['type' => 'noticiasfulp']);
-    $node->set('title', 'Nuestro título');
-    $node->set('body', [
-        'value' => 'Este es el body',
-        'format' => 'basic_html'
-    ]);
-
-    $node->enforceIsNew();
-    $node->save();
-    // }
-```
-
-Podemos probarlo en ejecutar_php
-
-GIF ENSEÑANDO COMO SE EJECUTA
-
-![enseñando_ejecutar_php]()
-
-No recomendado ya que la llamadas a bases de datos externas no se mostrarán adecuadamente
-
-Ver el punto [ejecutando mediante include](#id)
 
 ## Ejecutando nuestro script
 
