@@ -4,7 +4,7 @@
 
 1. [ Descripción](#id1)
 2. [ Instrucción para crear contenido](#id2)
-    - [2.1 Ejecutar php en consola Drupal 8](#id4.1)
+    - [2.1 Ejecutar php en consola Drupal 8](#id2.1)
 3. [ Datos requeridos](#id3)
 4. [ Tabla de relaciones de Drupal](#id4)
 5. [Ejecutando nuestro script](#id5)
@@ -132,7 +132,7 @@ Este script consume de la base de datos de Drupal y creará nodos tipo noticias_
 use Drupal\node\Entity\Node;
 function connectionMysql()
 {
-    // Variables de conección
+    // Variables de conexión
     $servername = "YOUR_SERVER";
     $database = "YOUR_DATABASE";
     $username = "YOUR_USERNAME";
