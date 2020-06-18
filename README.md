@@ -138,9 +138,9 @@ function connectionMysql()
     $username = "YOUR_USERNAME";
     $password = "YOUR_PASSWORD";
 
-    // Creando la conección
+    // Creando la conexión
     $conn = mysqli_connect($servername, $username, $password, $database);
-    // Comprobando conección
+    // Comprobando conexión
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
