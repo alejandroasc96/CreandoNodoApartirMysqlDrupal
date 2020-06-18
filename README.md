@@ -1,4 +1,4 @@
-# Creando Nodo apartir base de datos Mysql de Drupal
+# Creando Nodo a partir base de datos Mysql de Drupal
 
 **Índice**
 
@@ -13,13 +13,13 @@
 
 ## 1. Descripción <a name="id1"></a>
 
-En este documento se va a detallar como crear nodos de Drupal cargando los datos de la base de datos. La importancia de este documento radica en que podemos exportar toda nuestra base de datos de Drupal 8 y llevarnosla a cualquier otro servidor y desde allí automatizar el proceso de creación de contenido.
+En este documento se va a detallar como crear nodos de Drupal cargando los datos de MySql. La importancia de este documento radica en que podemos exportar toda nuestra base de datos de Drupal 8 y llevarnosla a cualquier otro servidor y desde allí automatizar el proceso de creación de contenido.
 
-Para este ejemplo se va a crear contenido para el nodo tipo 'noticias_fulp' (dicho ya ha sido creado desde la entrada gráfica).
+Para este ejemplo se va a crear contenido para el nodo tipo 'noticias_fulp' (dicho nodo ya ha sido creado desde la entrada gráfica).
 
 ## 2. Instrucción para crear contenido <a name="id2"></a>
 
-La estructura para crear un nodo sería la siguiente.
+La estructura para crear un nodo sería el siguiente:
 
 ```php
 use Drupal\node\Entity\Node;
@@ -42,7 +42,7 @@ Podemos probarlo en ejecutar_php <a name="id2.1"></a>
 
 No recomendado ya que la llamadas a bases de datos externas no se mostrarán adecuadamente
 
-Ver el punto [ejecutando mediante include](#id)
+Ver el punto [ejecutando mediante include](#id5.1)
 
 ## 3. Datos requeridos (nodo noticias_fulp) <a name="id3"></a>
 
@@ -52,7 +52,7 @@ Para ver los campos tenemos dos ayudas
 */admin/structure/types*
 ![contenido_nodo_noticia](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/video/ver_los_campos.gif?raw=true)
 
-**Desde una nodo del mismo tipo**
+**Desde un nodo del mismo tipo**
 ![contenido_nodo_noticia](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/video/ver_los_campos_desarrolo.gif?raw=true)
 
 ## 4. Tabla de relaciones de Drupal <a name="id4"></a>
@@ -71,7 +71,7 @@ _Tabla node_:
 
 _Tabla field_data_body_
 
-- busqueda
+- Búsqueda
 
   - bundle = noticias_fulp
   - entity_id = nid (tabla node)
@@ -83,37 +83,37 @@ _Tabla field_data_body_
 
 _Tabla field_data_field_image_portada_noticia_
 
-- búsqueda
+- Búsqueda
   - bundle = 'noticias_fulp'
   - entity_id = nid (tabla node)
 
-\*extraemos - field_image_interna_noticicia_fid - "........."\_alt
+\*Extraemos - field_image_interna_noticicia_fid - "........."\_alt
 -".........."\_title
 -".........."\_width
 -".........."\_height
 
 _Tabla file_managed_
 
-- búsqueda
+- Búsqueda
 
   - fid = field_image_interna_noticicia_fid
 
-- extraemos
+- Extraemos
   - filename
   - uri
 
 > **NOTA** es importante entender que todo el contenido de Drupal son nodos
 
 
-## Ejecutando nuestro script <a name="id5"></a>
+## 5. Ejecutando nuestro script <a name="id5"></a>
 
-Si lo que necesitamos es poder ejecutar nuestro script podemos hacerlo de varíos modos. Una posibilidad es mediante el uso de módulos tales como [DRUSH](https://www.drush.org/) mediante el comando:
+Si lo que necesitamos es poder ejecutar nuestro script podemos hacerlo de varios modos. Una posibilidad es mediante el uso de módulos tales como [DRUSH](https://www.drush.org/) mediante el comando:
 
 ```php
 $ drush php-script script.php
 ```
-
-Otra posibilidad, y la que vamos a usar en este ejemplo es llamando al script desde la consola de php de drupal haciendo un include. Dicho script debe estar dentro de los archivos de Drupal para que pueda ser llamado.
+<a name="id5.1"></a>
+Otra posibilidad, y la que vamos a usar en este ejemplo es llamando al script desde la consola de php de drupal haciendo un include. Dicho script debe estar dentro de los archivos de Drupal para que pueda ser llamado. 
 
 ![guardadoScript](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/images/guardadoScript.PNG?raw=true)
 
