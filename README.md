@@ -120,9 +120,9 @@ Otra posibilidad, y la que vamos a usar en este ejemplo es llamando al script de
 ```php
 include 'nombreScript.php';
 ```
-Ejemplo usando el [ejecutar_php](#2.1) de Drupal
+Ejemplo usando el [ejecutar_php](#id2.1) de Drupal
 
-![guardadoScript]()
+![guardadoScript](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/images/inlcudeConsolaDrupal.PNG?raw=true)
 ## 6. Script de ejemplo <a name="id6"></a>
 
 Este script consume de la base de datos de Drupal y creará nodos tipo noticias_fulp con los datos proporsionados
