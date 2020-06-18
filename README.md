@@ -44,8 +44,6 @@ Podemos probarlo en ejecutar_php
 
 ![enseñando_ejecutar_php](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/video/ejecutando_php.gif)
 
-<img src="https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/video/ejecutando_php.gif" width="40" height="40" />
-
 No recomendado ya que la llamadas a bases de datos externas no se mostrarán adecuadamente
 
 Ver el punto [ejecutando mediante include](#id)
@@ -54,8 +52,11 @@ Ver el punto [ejecutando mediante include](#id)
 
 A la hora de crear un nodo es importante saber qué información nos hace falta, para ello podemos consultarlo desde el propio Drupal.
 
-AÑADIR GIF COMO LLEGAR A LOS CAMPOS
+Para ver los campos tenemos dos ayudas
+*/admin/structure/types*
+![contenido_nodo_noticia]()
 
+**Desde una nodo del mismo tipo**
 ![contenido_nodo_noticia]()
 
 ## Tabla de relaciones de Drupal
@@ -119,12 +120,16 @@ Si lo que necesitamos es poder ejecutar nuestro script podemos hacerlo de varío
 $ drush php-script script.php
 ```
 
-Otra posibilidad, y la que vamos a usar en este ejemplo es llamando al script desde la consola de php de drupal haciendo un include
+Otra posibilidad, y la que vamos a usar en este ejemplo es llamando al script desde la consola de php de drupal haciendo un include. Dicho script debe estar dentro de los archivos de Drupal para que pueda ser llamado.
+
+//FOTO 
+
+![guardadoScript]()
 
 ```php
 include 'nombreScript.php';
 ```
-
+//GIF CORRER SCRIPT
 ## Nuestro Script de ejemplo
 
 Este script consume de la base de datos de Drupal y creará nodos tipo noticias_fulp con los datos proporsionados
