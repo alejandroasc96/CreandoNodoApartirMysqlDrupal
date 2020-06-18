@@ -37,14 +37,14 @@ use Drupal\node\Entity\Node;
 
     $node->enforceIsNew();
     $node->save();
-    // }
 ```
 
 Podemos probarlo en ejecutar_php
 
-GIF ENSEÑANDO COMO SE EJECUTA
 
-![enseñando_ejecutar_php]()
+![enseñando_ejecutar_php](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/video/ejecutando_php.gif)
+
+<img src="https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/video/ejecutando_php.gif" width="40" height="40" />
 
 No recomendado ya que la llamadas a bases de datos externas no se mostrarán adecuadamente
 
