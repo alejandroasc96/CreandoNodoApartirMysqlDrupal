@@ -3,17 +3,13 @@
 **Índice**
 
 1. [ Descripción](#id1)
-2. [ Tabla de relacion](#id2)
-3. [ Operadores aritméticos](#id3)
-4. [ Operadores de asignación](#id4)
-   - [4.1 Operadores de asignación](#id4.1)
-   - [4.2 Operador combinado](#id4.2)
-5. [Operadores lógicos](#id5)
-6. [Operadores para strings](#id6)
-7. [Operadores para arrays](#id7)
-8. [Operador Ternario](#id8)
-9. [Operador Elvis](#id9)
-10. [Operador Fusión Null](#id10)
+2. [ Instrucción para crear contenido](#id2)
+    - [2.1 Ejecutar php en consola Drupal 8](#id4.1)
+3. [ Datos requeridos](#id3)
+4. [ Tabla de relaciones de Drupal](#id4)
+5. [Ejecutando nuestro script](#id5)
+6. [Script de ejemplo](#id6)
+7. [Bibliografía](#id7)
 
 ## 1. Descripción <a name="id1"></a>
 
@@ -21,7 +17,7 @@ En este documento se va a detallar como crear nodos de Drupal cargando los datos
 
 Para este ejemplo se va a crear contenido para el nodo tipo 'noticias_fulp' (dicho ya ha sido creado desde la entrada gráfica).
 
-## Instrucción para crear contenido
+## 2. Instrucción para crear contenido <a name="id2"></a>
 
 La estructura para crear un nodo sería la siguiente.
 
@@ -39,31 +35,31 @@ use Drupal\node\Entity\Node;
     $node->save();
 ```
 
-Podemos probarlo en ejecutar_php
+Podemos probarlo en ejecutar_php <a name="id2.1"></a>
 
 
-![enseñando_ejecutar_php](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/video/ejecutando_php.gif)
+![enseñando_ejecutar_php](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/video/ejecutando_php.gif?raw=true)
 
 No recomendado ya que la llamadas a bases de datos externas no se mostrarán adecuadamente
 
 Ver el punto [ejecutando mediante include](#id)
 
-## Datos requeridos (nodo noticias_fulp)
+## 3. Datos requeridos (nodo noticias_fulp) <a name="id3"></a>
 
 A la hora de crear un nodo es importante saber qué información nos hace falta, para ello podemos consultarlo desde el propio Drupal.
 
 Para ver los campos tenemos dos ayudas
 */admin/structure/types*
-![contenido_nodo_noticia]()
+![contenido_nodo_noticia](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/video/ver_los_campos.gif?raw=true)
 
 **Desde una nodo del mismo tipo**
-![contenido_nodo_noticia]()
+![contenido_nodo_noticia](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/video/ver_los_campos_desarrolo.gif?raw=true)
 
-## Tabla de relaciones de Drupal
+## 4. Tabla de relaciones de Drupal <a name="id4"></a>
 
 Una vez que hemos identificado todo el contenido que nos hace falta para el nodo hay que observar como guarda la información drupal.
 
-![tabla_de_relaciones_drupal]()
+![tabla_de_relaciones_drupal](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/images/drupal7-db-schema.png?raw=true)
 
 De dicha tabla con un poco de imaginación observamos lo siguiente:
 
@@ -108,11 +104,8 @@ _Tabla file_managed_
 
 > **NOTA** es importante entender que todo el contenido de Drupal son nodos
 
-// AÑADIR GIF
-![](name-of-giphy.gif)
 
-
-## Ejecutando nuestro script
+## Ejecutando nuestro script <a name="id5"></a>
 
 Si lo que necesitamos es poder ejecutar nuestro script podemos hacerlo de varíos modos. Una posibilidad es mediante el uso de módulos tales como [DRUSH](https://www.drush.org/) mediante el comando:
 
@@ -122,15 +115,15 @@ $ drush php-script script.php
 
 Otra posibilidad, y la que vamos a usar en este ejemplo es llamando al script desde la consola de php de drupal haciendo un include. Dicho script debe estar dentro de los archivos de Drupal para que pueda ser llamado.
 
-//FOTO 
-
-![guardadoScript]()
+![guardadoScript](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/images/guardadoScript.PNG?raw=true)
 
 ```php
 include 'nombreScript.php';
 ```
-//GIF CORRER SCRIPT
-## Nuestro Script de ejemplo
+Ejemplo usando el [ejecutar_php](#2.1) de Drupal
+
+![guardadoScript]()
+## 6. Script de ejemplo <a name="id6"></a>
 
 Este script consume de la base de datos de Drupal y creará nodos tipo noticias_fulp con los datos proporsionados
 
@@ -304,3 +297,7 @@ function subiendoNoticiaDrupal()
 subiendoNoticiaDrupal();
 
 ```
+
+## 7. Bibliografía <a name="id7"></a>
+
+[Vídeo Youtube](https://www.youtube.com/watch?v=BhH34McCoB0)
