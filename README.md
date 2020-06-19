@@ -87,10 +87,12 @@ _Tabla field_data_field_image_portada_noticia_
   - bundle = 'noticias_fulp'
   - entity_id = nid (tabla node)
 
-\*Extraemos - field_image_interna_noticicia_fid - "........."\_alt
--".........."\_title
--".........."\_width
--".........."\_height
+\*Extraemos 
+- field_image_interna_noticicia_fid 
+- "........."\_alt
+- ".........."\_title
+- ".........."\_width
+- ".........."\_height
 
 _Tabla file_managed_
 
