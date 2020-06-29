@@ -134,8 +134,10 @@ Ejemplo usando el [ejecutar_php](#id2.1) de Drupal
 Este [script](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/codigo.php) consume de la base de datos de Drupal 7 y creará nodos tipo noticias_fulp con los datos proporsionados (puede crear nodos tando en drupal 7 y 8)
 
 >**NOTA** Los datos deberían sacarse de las tablas no
-## 7. Posibles problemas <a name="id8"></a>
+## 7. Posibles problemas <a name="id7"></a>
+
 [Caracteres especiales body y title](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/OtrosDocu/CaracteresEspeciales.md)
+
 [Recoger todas las fotos de drupal 7 para poder subirlar y enlazarlas con nuevas publicaciones](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/OtrosDocu/RecorrerYGuardarFotosDrupal7.md)
 
 
