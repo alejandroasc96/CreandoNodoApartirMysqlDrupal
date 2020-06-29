@@ -9,7 +9,8 @@
 4. [ Tabla de relaciones de Drupal](#id4)
 5. [Ejecutando nuestro script](#id5)
 6. [Script de ejemplo](#id6)
-7. [Bibliografía](#id7)
+7. [Script de ejemplo](#id7)
+8. [Bibliografía](#id8)
 
 ## 1. Descripción <a name="id1"></a>
 
@@ -299,7 +300,11 @@ function subiendoNoticiaDrupal()
 subiendoNoticiaDrupal();
 
 ```
+## 7. Posibles problemas <a name="id8"></a>
+[Caracteres especiales body y title]()
+[Recoger todas las fotos de drupal 7 para poder subirlar y enlazarlas con nuevas publicaciones]()
 
-## 7. Bibliografía <a name="id7"></a>
+
+## 8. Bibliografía <a name="id8"></a>
 
 [Vídeo Youtube](https://www.youtube.com/watch?v=BhH34McCoB0)
