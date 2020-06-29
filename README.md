@@ -136,9 +136,9 @@ Este [script](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/bl
 >**NOTA** Los datos deberían sacarse de las tablas no
 ## 7. Posibles problemas <a name="id7"></a>
 
-[Caracteres especiales body y title](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/OtrosDocu/CaracteresEspeciales.md)
+* [Caracteres especiales body y title](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/OtrosDocu/CaracteresEspeciales.md)
 
-[Recoger todas las fotos de drupal 7 para poder subirlar y enlazarlas con nuevas publicaciones](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/OtrosDocu/RecorrerYGuardarFotosDrupal7.md)
+* [Recoger todas las fotos de drupal 7 para poder subirlar y enlazarlas con nuevas publicaciones](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/OtrosDocu/RecorrerYGuardarFotosDrupal7.md)
 
 
 ## 8. Bibliografía <a name="id8"></a>
