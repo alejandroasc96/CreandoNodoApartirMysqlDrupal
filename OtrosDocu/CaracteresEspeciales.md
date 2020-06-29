@@ -3,7 +3,7 @@
 A la hora de realizar publicaciones automatizadas podemos encontrarnos con problemas imprimiendo caracteres especiales. 
 Ejemplo:
 
-![fotoErrorCaracter](?raw=true)
+![fotoErrorCaracter](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/images/caracterEspecial.PNG?raw=true)
 
 ## Solución
 
@@ -13,7 +13,7 @@ Realizar un encode a utf8mb4
 $bodyValue = mb_convert_encoding($arrayNoticiasFulp[$i]['body_value'],'UTF-8', 'Windows-1252');
 ```
 *Resultado*:
-![SolucionfotoErrorCaracter](?raw=true)
+![SolucionfotoErrorCaracter](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/images/finalCaracterEspecial.PNG?raw=true)
 
 ## Explicación
 

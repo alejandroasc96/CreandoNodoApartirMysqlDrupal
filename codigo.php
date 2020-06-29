@@ -21,7 +21,7 @@ function connectionMysql()
     return $conn;
 }
 
-
+// SELECT PARA DRUPAL 7
 function nodoBodyImagenPortadaNoticiasFulp()
 {
     $conn = connectionMysql();
@@ -68,6 +68,7 @@ function nodoBodyImagenPortadaNoticiasFulp()
     return $new_array;
 }
 
+// SELECT PARA DRUPAL 7
 function imagenInterna()
 {
     $conn = connectionMysql();
@@ -100,13 +101,10 @@ function imagenInterna()
 function unionArray()
 {
     $array0 = nodoBodyImagenPortadaNoticiasFulp();
-    //var_dump($array0);
     $array1 = imagenInterna();
-    $formatArrayResult = [];
     for ($i = 0; $i < count($array0); $i++) {
         for ($j = 0; $j < count($array1); $j++) {
             if ($array0[$i]['nid'] == $array1[$j]['nid']) {
-                // $array0[$i]['entity_id'] = $array1[$j]['entity_id'];
                 $array0[$i]['fid_img_interna'] = $array1[$j]['fid_img_interna'];
                 $array0[$i]['alt_img_interna'] = $array1[$j]['alt_img_interna'];
                 $array0[$i]['title_img_interna'] = $array1[$j]['title_img_interna'];
@@ -114,24 +112,22 @@ function unionArray()
                 $array0[$i]['height_img_interna'] = $array1[$j]['height_img_interna'];
                 $array0[$i]['nombre_img_interna'] = $array1[$j]['nombre_img_interna'];
                 $array0[$i]['uri_img_interna'] = $array1[$j]['uri_img_interna'];
+                break;
             }
         }
     }
-    // print_r($array0[9]);
     return $array0;
 }
 
 function subiendoNoticiaDrupal()
 {
     $arrayNoticiasFulp = unionArray();
-    // print(utf8_encode($arrayNoticiasFulp[3]['body_value']));
     
-    // for ($i=0; $i < count($arrayNoticiasFulp) ; $i++) { 
-        
+    for ($i=0; $i < count($arrayNoticiasFulp) ; $i++) { 
 
-        $titleNew = utf8_encode($arrayNoticiasFulp[3]['title']) ?: '';
+        $titleNew = mb_convert_encoding($arrayNoticiasFulp[$i]['title'],'UTF-8', 'Windows-1252') ?: '';
 
-        $bodyValue = utf8_encode($arrayNoticiasFulp[3]['body_value']) ?: '';
+        $bodyValue = mb_convert_encoding($arrayNoticiasFulp[$i]['body_value'],'UTF-8', 'Windows-1252') ?: '';
         $bodyFormat = $arrayNoticiasFulp[3]['body_format'] ?: '';
 
         $idImgPortada = $arrayNoticiasFulp[3]['fid_img_portada'] ?: '';

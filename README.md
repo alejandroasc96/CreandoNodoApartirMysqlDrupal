@@ -9,14 +9,14 @@
 4. [ Tabla de relaciones de Drupal](#id4)
 5. [Ejecutando nuestro script](#id5)
 6. [Script de ejemplo](#id6)
-7. [Script de ejemplo](#id7)
+7. [Posibles problemas](#id7)
 8. [Bibliografía](#id8)
 
 ## 1. Descripción <a name="id1"></a>
 
-En este documento se va a detallar como crear nodos de Drupal cargando los datos de MySql. La importancia de este documento radica en que podemos exportar toda nuestra base de datos de Drupal 8 y llevarnosla a cualquier otro servidor y desde allí automatizar el proceso de creación de contenido.
+En este documento se va a detallar como crear nodos de Drupal cargando los datos de MySql. La importancia de este documento radica en que podemos exportar toda nuestra base de datos de Drupal 7 y llevarnosla a cualquier otro servidor y desde allí automatizar el proceso de creación de contenido.
 
-Para este ejemplo se va a crear contenido para el nodo tipo 'noticias_fulp' (dicho nodo ya ha sido creado desde la entrada gráfica).
+Para este ejemplo se va a crear contenido para el nodo tipo 'noticias_fulp' (dicho nodo ya ha sido creado desde la entrada gráfica) en Drupal 8 cargando los datos desde Drupal 7.
 
 ## 2. Instrucción para crear contenido <a name="id2"></a>
 
@@ -57,6 +57,9 @@ Para ver los campos tenemos dos ayudas
 ![contenido_nodo_noticia](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/video/ver_los_campos_desarrolo.gif?raw=true)
 
 ## 4. Tabla de relaciones de Drupal <a name="id4"></a>
+
+>**NOTA** En este apartado vamos a extraer toda la información de las tablas originales dado que no tenemos activado el control de ediciones. Si usted guarda una copia de todos los cambios efectuados  deberá recoger los datos de las tablas con la etiqueta revision. Ejemplo: field_data_body pasaría a ser -> field_revision_body(En está tabla se guardan todas las ediciones del body de nuestro contenido).
+ Tenga cuidado a la hora de extraer contenido de esta tabla ya que para un nodo con un id puede haber varias entradas, haga uso de la sentencia JOIN en sql para resolver dicho problema.
 
 Una vez que hemos identificado todo el contenido que nos hace falta para el nodo hay que observar como guarda la información drupal.
 
@@ -128,181 +131,12 @@ Ejemplo usando el [ejecutar_php](#id2.1) de Drupal
 ![guardadoScript](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/images/inlcudeConsolaDrupal.PNG?raw=true)
 ## 6. Script de ejemplo <a name="id6"></a>
 
-Este script consume de la base de datos de Drupal y creará nodos tipo noticias_fulp con los datos proporsionados
+Este [script](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/codigo.php) consume de la base de datos de Drupal 7 y creará nodos tipo noticias_fulp con los datos proporsionados (puede crear nodos tando en drupal 7 y 8)
 
-```php
-<?php
-use Drupal\node\Entity\Node;
-function connectionMysql()
-{
-    // Variables de conexión
-    $servername = "YOUR_SERVER";
-    $database = "YOUR_DATABASE";
-    $username = "YOUR_USERNAME";
-    $password = "YOUR_PASSWORD";
-
-    // Creando la conexión
-    $conn = mysqli_connect($servername, $username, $password, $database);
-    // Comprobando conexión
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    return $conn;
-}
-
-
-function nodoBodyImagenPortadaNoticiasFulp()
-{
-    $conn = connectionMysql();
-
-    $sql = "SELECT
-    N.nid,
-    N.title,
-    FROM_UNIXTIME(N.created) AS created,
-    B.language,
-    B.body_value,
-    B.body_summary,
-    B.body_format,
-    P.field_imagen_portada_fid AS fid_img_portada,
-    P.field_imagen_portada_alt AS alt_img_portada,
-    P.field_imagen_portada_title AS title_img_portada,
-    P.field_imagen_portada_width AS width_img_portada,
-    P.field_imagen_portada_height AS height_img_portada,
-    M.filename AS nombre_img_portada,
-    M.uri AS uri_img_portada,
-    null AS fid_img_interna,
-    null AS alt_img_interna,
-    null AS title_img_interna,
-    null AS width_img_interna,
-    null AS height_img_interna,
-    null AS nombre_img_interna
-    FROM node N, field_data_body B, file_managed M, field_data_field_imagen_portada P
-    WHERE N.type = 'noticias_fulp'
-    AND B.bundle = 'noticias_fulp'
-    AND B.entity_id = N.nid
-    AND P.bundle = 'noticias_fulp'
-    AND P.entity_id = N.nid
-    AND M.fid = P.field_imagen_portada_fid
-    ORDER BY N.nid
-    ";
-    $result = $conn->query($sql);
-
-
-    while ($row = mysqli_fetch_assoc($result)) {
-        $new_array[] = $row; // Inside while loop
-
-    }
-
-    $conn->close();
-    return $new_array;
-}
-
-function imagenInterna()
-{
-    $conn = connectionMysql();
-
-    $sql = "SELECT
-    N.nid,
-    F.field_imagen_interna_noticia_fid AS fid_img_interna,
-    F.field_imagen_interna_noticia_alt AS alt_img_interna,
-    F.field_imagen_interna_noticia_title AS title_img_interna,
-    F.field_imagen_interna_noticia_width AS width_img_interna,
-    F.field_imagen_interna_noticia_height AS height_img_interna,
-    M.filename AS nombre_img_interna,
-    M.uri AS uri_img_interna
-    FROM node N, field_data_field_imagen_interna_noticia F, file_managed M
-    WHERE N.type = 'noticias_fulp'
-    AND F.bundle = 'noticias_fulp'
-    AND M.fid = F.field_imagen_interna_noticia_fid
-    AND F.entity_id = N.nid
-    ORDER BY N.nid
-    ";
-
-    $result = $conn->query($sql);
-    while ($row = mysqli_fetch_assoc($result)) {
-        $array_img_interna[] = $row; // Inside while loop
-    }
-    $conn->close();
-    return $array_img_interna;
-}
-
-function unionArray()
-{
-    $array0 = nodoBodyImagenPortadaNoticiasFulp();
-    $array1 = imagenInterna();
-    $formatArrayResult = [];
-    for ($i = 0; $i < count($array0); $i++) {
-        for ($j = 0; $j < count($array1); $j++) {
-            if ($array0[$i]['nid'] == $array1[$j]['nid']) {
-                $array0[$i]['fid_img_interna'] = $array1[$j]['fid_img_interna'];
-                $array0[$i]['alt_img_interna'] = $array1[$j]['alt_img_interna'];
-                $array0[$i]['title_img_interna'] = $array1[$j]['title_img_interna'];
-                $array0[$i]['width_img_interna'] = $array1[$j]['width_img_interna'];
-                $array0[$i]['height_img_interna'] = $array1[$j]['height_img_interna'];
-                $array0[$i]['nombre_img_interna'] = $array1[$j]['nombre_img_interna'];
-                $array0[$i]['uri_img_interna'] = $array1[$j]['uri_img_interna'];
-            }
-        }
-    }
-    return $array0;
-}
-
-function subiendoNoticiaDrupal()
-{
-    $arrayNoticiasFulp = unionArray();
-
-    for ($i=0; $i < count($arrayNoticiasFulp) ; $i++) {
-
-
-        $titleNew = utf8_encode($arrayNoticiasFulp[$i]['title']) ?: '';
-
-        $bodyValue = utf8_encode($arrayNoticiasFulp[$i]['body_value']) ?: '';
-        $bodyFormat = $arrayNoticiasFulp[$i]['body_format'] ?: '';
-
-        $idImgPortada = $arrayNoticiasFulp[$i]['fid_img_portada'] ?: '';
-        $altImgPortada = $arrayNoticiasFulp[$i]['alt_img_portada'] ?: '';
-        $titleImgPortada = $arrayNoticiasFulp[$i]['title_img_portada'] ?: '';
-        $withImgPortada = $arrayNoticiasFulp[$i]['width_img_portada'] ?: '';
-        $heightImgPortada = $arrayNoticiasFulp[$i]['height_img_portada'] ?: '';
-
-        $idImgInterna = $arrayNoticiasFulp[$i]['fid_img_interna'] ?: '';
-        $altImgInterna = $arrayNoticiasFulp[$i]['alt_img_interna'] ?: '';
-        $titleImgInterna = $arrayNoticiasFulp[$i]['title_img_interna'] ?: '';
-        $withImgInterna = $arrayNoticiasFulp[$i]['width_img_interna'] ?: '';
-        $heightImgInterna = $arrayNoticiasFulp[$i]['height_img_interna'] ?: '';
-
-        $node = Node::create(['type' => 'noticiasfulp']);
-        $node->set('title', $titleNew);
-        $node->set('body', [
-            'value' => $bodyValue,
-            'format' => $bodyFormat
-        ]);
-        $node->set('field_image', [
-            'target_id' => $idImgPortada,
-            'alt' => $altImgPortada,
-            'title'=> $titleImgPortada,
-            'width' => $withImgPortada,
-            'height' => $heightImgPortada
-        ]);
-        $node->set('field_imagen_cuerpo', [
-            'target_id' => $idImgInterna,
-            'alt' => $altImgInterna,
-            'title'=> $titleImgInterna,
-            'width' => $withImgInterna,
-            'height' => $heightImgInterna
-        ]);
-        $node->set('gva_breadcrumb', 'disable');
-        $node->enforceIsNew();
-        $node->save();
-    }
-}
-
-subiendoNoticiaDrupal();
-
-```
+>**NOTA** Los datos deberían sacarse de las tablas no
 ## 7. Posibles problemas <a name="id8"></a>
-[Caracteres especiales body y title]()
-[Recoger todas las fotos de drupal 7 para poder subirlar y enlazarlas con nuevas publicaciones]()
+[Caracteres especiales body y title](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/OtrosDocu/CaracteresEspeciales.md)
+[Recoger todas las fotos de drupal 7 para poder subirlar y enlazarlas con nuevas publicaciones](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/OtrosDocu/RecorrerYGuardarFotosDrupal7.md)
 
 
 ## 8. Bibliografía <a name="id8"></a>
