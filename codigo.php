@@ -128,19 +128,19 @@ function subiendoNoticiaDrupal()
         $titleNew = mb_convert_encoding($arrayNoticiasFulp[$i]['title'],'UTF-8', 'Windows-1252') ?: '';
 
         $bodyValue = mb_convert_encoding($arrayNoticiasFulp[$i]['body_value'],'UTF-8', 'Windows-1252') ?: '';
-        $bodyFormat = $arrayNoticiasFulp[3]['body_format'] ?: '';
+        $bodyFormat = $arrayNoticiasFulp[$i]['body_format'] ?: '';
 
-        $idImgPortada = $arrayNoticiasFulp[3]['fid_img_portada'] ?: '';
-        $altImgPortada = $arrayNoticiasFulp[3]['alt_img_portada'] ?: '';
-        $titleImgPortada = $arrayNoticiasFulp[3]['title_img_portada'] ?: '';
-        $withImgPortada = $arrayNoticiasFulp[3]['width_img_portada'] ?: '';
-        $heightImgPortada = $arrayNoticiasFulp[3]['height_img_portada'] ?: '';
+        $idImgPortada = $arrayNoticiasFulp[$i]['fid_img_portada'] ?: '';
+        $altImgPortada = $arrayNoticiasFulp[$i]['alt_img_portada'] ?: '';
+        $titleImgPortada = $arrayNoticiasFulp[$i]['title_img_portada'] ?: '';
+        $withImgPortada = $arrayNoticiasFulp[$i]['width_img_portada'] ?: '';
+        $heightImgPortada = $arrayNoticiasFulp[$i]['height_img_portada'] ?: '';
 
-        $idImgInterna = $arrayNoticiasFulp[3]['fid_img_interna'] ?: '';
-        $altImgInterna = $arrayNoticiasFulp[3]['alt_img_interna'] ?: '';
-        $titleImgInterna = $arrayNoticiasFulp[3]['title_img_interna'] ?: '';
-        $withImgInterna = $arrayNoticiasFulp[3]['width_img_interna'] ?: '';
-        $heightImgInterna = $arrayNoticiasFulp[3]['height_img_interna'] ?: '';
+        $idImgInterna = $arrayNoticiasFulp[$i]['fid_img_interna'] ?: '';
+        $altImgInterna = $arrayNoticiasFulp[$i]['alt_img_interna'] ?: '';
+        $titleImgInterna = $arrayNoticiasFulp[$i]['title_img_interna'] ?: '';
+        $withImgInterna = $arrayNoticiasFulp[$i]['width_img_interna'] ?: '';
+        $heightImgInterna = $arrayNoticiasFulp[$i]['height_img_interna'] ?: '';
         
 
         $node = Node::create(['type' => 'noticiasfulp']);
