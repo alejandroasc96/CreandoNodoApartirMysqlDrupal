@@ -167,7 +167,7 @@ function subiendoNoticiaDrupal()
 
         $node->enforceIsNew();
         $node->save();
-    // }
+    }
 }
 
 subiendoNoticiaDrupal();
