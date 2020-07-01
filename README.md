@@ -118,6 +118,8 @@ Si lo que necesitamos es poder ejecutar nuestro script podemos hacerlo de varios
 ```php
 $ drush php-script script.php
 ```
+También podríamos ejecutar el script poniendo la ruta donde se encuentra en el navegador.
+
 <a name="id5.1"></a>
 Otra posibilidad, y la que vamos a usar en este ejemplo es llamando al script desde la consola de php de drupal haciendo un include. Dicho script debe estar dentro de los archivos de Drupal para que pueda ser llamado. 
 

@@ -122,47 +122,83 @@ function unionArray()
 function subiendoNoticiaDrupal()
 {
     $arrayNoticiasFulp = unionArray();
-    
-    for ($i=0; $i < count($arrayNoticiasFulp) ; $i++) { 
 
+    $countArray = count($arrayNoticiasFulp);
+    $createdAnt = '';
+    for ($i=7; $i < $countArray ; $i++) { 
         $titleNew = mb_convert_encoding($arrayNoticiasFulp[$i]['title'],'UTF-8', 'Windows-1252') ?: '';
 
         $bodyValue = mb_convert_encoding($arrayNoticiasFulp[$i]['body_value'],'UTF-8', 'Windows-1252') ?: '';
         $bodyFormat = $arrayNoticiasFulp[$i]['body_format'] ?: '';
 
-        $idImgPortada = $arrayNoticiasFulp[$i]['fid_img_portada'] ?: '';
-        $altImgPortada = $arrayNoticiasFulp[$i]['alt_img_portada'] ?: '';
-        $titleImgPortada = $arrayNoticiasFulp[$i]['title_img_portada'] ?: '';
+        // Si no tiene fecha de creacíon cogería la fecha de la noticia anterior
+        $created = $arrayNoticiasFulp[$i]['created'] ?: $createdAnt;
+        $createdAnt = $created;
+        
+        if($arrayNoticiasFulp[$i]['uri_img_portada']){
+            // nombre de la foto portada si quieres coger el nombre de la base de datos, asegurate que no tenga
+            // carácteres especiales(cuidado con las ñ)
+            $altImgPortada = 'imagen_'.$i;
+        }
+        $titleImgPortada = 'imagen_'.$i;
         $withImgPortada = $arrayNoticiasFulp[$i]['width_img_portada'] ?: '';
         $heightImgPortada = $arrayNoticiasFulp[$i]['height_img_portada'] ?: '';
+        $uriImgPortada =  $arrayNoticiasFulp[$i]['uri_img_portada'] ?: null;
+        if(preg_match("/^public:/", $uriImgPortada)==1)
+        {   
+            $uriImgPortada = substr($uriImgPortada, 8);
+        }
 
-        $idImgInterna = $arrayNoticiasFulp[$i]['fid_img_interna'] ?: '';
-        $altImgInterna = $arrayNoticiasFulp[$i]['alt_img_interna'] ?: '';
-        $titleImgInterna = $arrayNoticiasFulp[$i]['title_img_interna'] ?: '';
+        if($arrayNoticiasFulp[$i]['uri_img_interna']){
+            // nombre de la foto interna si quieres coger el nombre de la base de datos, asegurate que no tenga
+            // carácteres especiales(cuidado con las ñ)
+            $altImgInterna = 'imagen_'.$i;
+        }
+        $titleImgInterna = 'imagen_'.$i;
         $withImgInterna = $arrayNoticiasFulp[$i]['width_img_interna'] ?: '';
         $heightImgInterna = $arrayNoticiasFulp[$i]['height_img_interna'] ?: '';
+        $uriImgInterna = $arrayNoticiasFulp[$i]['uri_img_interna'] ?: null;
+        if(preg_match("/^public:/", $uriImgInterna)==1)
+        {
+            $uriImgInterna = substr($uriImgInterna, 8);
+        }
         
-
         $node = Node::create(['type' => 'noticiasfulp']);
         $node->set('title', $titleNew);
+        // Select que indica qué tipo de noticia es, debes verificar si tu nodo tiene este select en caso contrario no añadir
+        // Desactivado porque en la base de datos todas son de tipo general,
+        // si no se añade esta opción por defecto las coge todas
+        // si se le pone valor null no cogerá ninguna opción del select
+        $node->set('field_portfolio_tags', [
+            'target_id' => null
+        ]);
         $node->set('body', [
             'value' => $bodyValue,
             'format' => $bodyFormat
         ]);
-        $node->set('field_image', [
-            'target_id' => $idImgPortada,
-            'alt' => $altImgPortada,
-            'title'=> $titleImgPortada,
-            'width' => $withImgPortada,
-            'height' => $heightImgPortada
-        ]);
-        $node->set('field_imagen_cuerpo', [
-            'target_id' => $idImgInterna,
-            'alt' => $altImgInterna,
-            'title'=> $titleImgInterna,
-            'width' => $withImgInterna,
-            'height' => $heightImgInterna
-        ]);
+        $node->set('created', $created);
+        if($uriImgPortada){
+            $data = file_get_contents(__DIR__ . '/sites/default/files/'.$uriImgPortada);
+            $file = file_save_data($data, 'public:/'.$uriImgPortada);
+            $node->set('field_image', [
+                'target_id' => $file->id(),
+                'alt' => $altImgPortada,
+                'title'=> $titleImgPortada,
+                'width' => $withImgPortada,
+                'height' => $heightImgPortada
+            ]);
+        }
+        if($uriImgInterna){
+            $data1 = file_get_contents(__DIR__ . '/sites/default/files/'.$uriImgInterna);
+            $file1 = file_save_data($data1, 'public:/'.$uriImgInterna);
+            $node->set('field_imagen_cuerpo', [
+                'target_id' => $file1->id(),
+                'alt' => $altImgInterna,
+                'title'=> $titleImgInterna,
+                'width' => $withImgInterna,
+                'height' => $heightImgInterna
+            ]);
+        }
         $node->set('gva_breadcrumb', 'disable');
 
         $node->enforceIsNew();
@@ -171,3 +207,4 @@ function subiendoNoticiaDrupal()
 }
 
 subiendoNoticiaDrupal();
+
