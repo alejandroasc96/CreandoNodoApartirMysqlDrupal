@@ -140,7 +140,7 @@ Este [script](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/bl
 
 * [Recoger todas las fotos de drupal 7 para poder subirlar y enlazarlas con nuevas publicaciones](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/OtrosDocu/RecorrerYGuardarFotosDrupal7.md)
 
-* [Agregar imagen de portada]()
+* [Agregar imagen de portada](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/OtrosDocu/AgregarImagenANodo.md)
 
 
 ## 8. Bibliografía <a name="id8"></a>
