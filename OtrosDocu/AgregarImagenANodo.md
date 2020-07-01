@@ -1,7 +1,7 @@
 ## Descripción
-A la hora de crear nodos dentro de Drupal podemos agregarles diferentes campos, uno de ellos es poder agregar una foto de portada.
+A la hora de crear nodos dentro de Drupal podemos agregarles diferentes campos, uno de ellos es la foto de portada.
 
-Para ello uno debe seguir el siguiente flujo de códgio:
+Estructura para agregar portada:
 ```php
 //cogemos nuestro fichero
 $data = file_get_contents(__DIR__ . '/images/my_image.jpeg');
@@ -26,7 +26,8 @@ Dicho esto vamos a verlo con nuestro ejemplo.
 ## Añadiendo portada a nuestro nodo noticiasFulp
 
 Dada nuestra ruta donde tenemos guardada la imagen
-[Mostrando_ruta_imagen_server]()
+
+![Mostrando_ruta_imagen_server](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/images/carpetaConImagenNodo.PNG?raw=true)
 
 Nuestra instrucción quedería de la siguiente forma
 
@@ -34,9 +35,6 @@ Nuestra instrucción quedería de la siguiente forma
  $node = Node::create(['type' => 'noticiasfulp']);
         $node->set('title', $titleNew);
         // Select que indica qué tipo de noticia es
-        $node->set('field_portfolio_tags', [
-            'target_id' => 28
-        ]);
         $node->set('body', [
             'value' => $bodyValue,
             'format' => $bodyFormat
@@ -51,7 +49,6 @@ Nuestra instrucción quedería de la siguiente forma
             'width' => $withImgPortada,
             'height' => $heightImgPortada
         ]);
-        $node->set('gva_breadcrumb', 'disable');
 
         $node->enforceIsNew();
         $node->save();
