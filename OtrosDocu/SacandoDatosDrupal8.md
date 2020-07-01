@@ -10,7 +10,7 @@ Para este ejemplo sacaremos los datos del nodo original y no obtendremos las pos
 
 *Diagrama :*
 
-![Diagrama_drupal8]()
+![Diagrama_drupal8](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/images/schema_Drupal8.png?raw=true)
 
 
 _Tabla node_ -> node:

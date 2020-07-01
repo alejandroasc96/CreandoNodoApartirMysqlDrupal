@@ -144,6 +144,8 @@ Este [script](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/bl
 
 * [Agregar imagen de portada](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/OtrosDocu/AgregarImagenANodo.md)
 
+* [Tablas BD en Drupal 8](https://github.com/alejandroasc96/CreandoNodoApartirMysqlDrupal/blob/master/OtrosDocu/SacandoDatosDrupal8.md)
+
 
 ## 8. Bibliografía <a name="id8"></a>
 
