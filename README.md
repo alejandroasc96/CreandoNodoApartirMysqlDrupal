@@ -14,7 +14,7 @@
 
 ## 1. Descripción <a name="id1"></a>
 
-En este documento se va a detallar como crear nodos de Drupal cargando los datos de MySql. La importancia de este documento radica en que podemos exportar toda nuestra base de datos de Drupal 7 y llevarnosla a cualquier otro servidor y desde allí automatizar el proceso de creación de contenido.
+En este documento se va a detallar como crear nodos de Drupal cargando los datos de MySql. La importancia de este documento radica en que podemos exportar toda nuestra base de datos de Drupal 7 y llevárnosla a cualquier otro servidor y desde allí automatizar el proceso de creación de contenido.
 
 Para este ejemplo se va a crear contenido para el nodo tipo 'noticias_fulp' (dicho nodo ya ha sido creado desde la entrada gráfica) en Drupal 8 cargando los datos desde Drupal 7.
 
@@ -58,7 +58,7 @@ Para ver los campos tenemos dos ayudas
 
 ## 4. Tabla de relaciones de Drupal <a name="id4"></a>
 
->**NOTA** En este apartado vamos a extraer toda la información de las tablas originales dado que no tenemos activado el control de ediciones. Si usted guarda una copia de todos los cambios efectuados  deberá recoger los datos de las tablas con la etiqueta revision. Ejemplo: field_data_body pasaría a ser -> field_revision_body(En está tabla se guardan todas las ediciones del body de nuestro contenido).
+>**NOTA** En este apartado vamos a extraer toda la información de las tablas originales dado que no tenemos activado el control de ediciones. Si usted guarda una copia de todos los cambios efectuados  deberá recoger los datos de las tablas con la etiqueta revision. Ejemplo: field_data_body pasaría a ser -> field_revision_body(En esta tabla se guardan todas las ediciones del body de nuestro contenido).
  Tenga cuidado a la hora de extraer contenido de esta tabla ya que para un nodo con un id puede haber varias entradas, haga uso de la sentencia JOIN en sql para resolver dicho problema.
 
 Una vez que hemos identificado todo el contenido que nos hace falta para el nodo hay que observar como guarda la información drupal.
